@@ -23,7 +23,8 @@
     "client": "cd client && yarn run start",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
     "db:reset": "node server/db/seeds/index.js",
-    "prettier": "prettier '*/**/*.js' --write"
+    "prettier": "prettier '*/**/*.js' --write",
+    "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
