@@ -49,8 +49,8 @@ export default function DropDownMenu() {
     try {
       const response = await axios({
         method: "POST",
-        // url: `${process.env.REACT_APP_API_URL}/users/logout`,
-        url: `/api/users/logout`,
+        url: `${process.env.REACT_APP_API_URL}/users/logout`,
+        // url: `/api/users/logout`,
         withCredentials: true,
       });
       console.log(response);

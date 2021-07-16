@@ -72,8 +72,8 @@ export default function Dashboard() {
 
   const getProductsAndOrders = async () => {
     try {
-      // const response = await axios.get(`${process.env.REACT_APP_API_URL}/orders/orders`);
-      const response = await axios.get(`/api/orders/orders`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/orders/orders`);
+      // const response = await axios.get(`/api/orders/orders`);
       console.log(response.data);
       setOrders(response.data);
     } catch (error) {

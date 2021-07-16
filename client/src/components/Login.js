@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 
 const Login = () => {
@@ -52,8 +53,8 @@ const Login = () => {
       console.log('inside login')
       const user = await axios({
         method: 'POST',
-        //url: `${process.env.REACT_APP_API_URL}/login`,
-        url: `/api/login`,
+        url: `${process.env.REACT_APP_API_URL}/login`,
+        // url: `/api/login`,
         data: userInfo,
         withCredentials: "include",
         }
@@ -66,7 +67,12 @@ const Login = () => {
      // console.log(JSON.parse(sessionStorage.getItem('user')))
       history.push('/catalogo');
     } catch (error) {
-      console.log('Failed to Log In')
+      console.log(error)
+      console.log('Failed to Log In');
+      swal({
+        icon: "error",
+        text: "Email or Password incorrect",
+      });
     }
     setLoading(false)
   }

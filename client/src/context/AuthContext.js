@@ -13,9 +13,8 @@ export function AppContextProvider({children}){
     console.log('currentUser Auth: ', currentUser)
     let some;
     if (user && !currentUser) {
-      // .get(`${process.env.REACT_APP_API_URL}/users/me`, {
-      axios
-        .get(`/api/users/me`, {
+      axios.get(`${process.env.REACT_APP_API_URL}/users/me`, {
+      // axios.get(`/api/users/me`, {
           withCredentials: true
         })
         .then(({ data }) => {

@@ -10,26 +10,25 @@ import step6 from "../assets/images/enlinea/step6.jpg";
 const EnLinea = () => {
   return (
     <Container>
+            <Title>
+      <p>Para hacer este tipo de compras contamos con catálogos digitales de Costco y Bjs.</p> 
+      </Title>
       <Card1>
         <StepImage>
           <img src={step1} alt="Step 1" />
         </StepImage>
         <Info>
-          <h2>BUSCA LO QUE NECESITAS</h2>
+          <h2>Envía la lista con los productos</h2>
           <p>
-            Seleccionas los productos que necesitas en esas paginas que no
-            puedes pagar o que no te deje completar la compra y nos envías el
-            link de cada producto junto a su descripción (talla, color,
-            cantidad).
+          Envíanos el link y lista de compras a compras@grupoipg2000.com, nos comunicaremos contigo para indicarte el resumen de la compra y el monto a pagar.
           </p>
         </Info>
       </Card1>
       <Card2>
         <Info>
-          <h2>ENVIA LA LISTA CON LOS PRODUCTOS</h2>
+          <h2>Realiza tu pago</h2>
           <p>
-            Envía la lista a compras@grupoipg2000.com y nosotros nos comunicamos
-            contigo para mostrarte el resumen de la compra y el monto a pagar.
+          Verifica que todos los productos estén correctos y procede al pago vía Zelle, PayPal, Apple Pay, o una transferencia directa a BOFA.
           </p>
         </Info>
         <StepImage>
@@ -41,23 +40,17 @@ const EnLinea = () => {
           <img src={step3} alt="Step 3" />
         </StepImage>
         <Info>
-          <h2>REALIZA EL PAGO</h2>
+          <h2>Control de la compra</h2>
           <p>
-            Verifica que todos los productos estén correctos y procede al pago
-            vía Zelle, PayPal, Apple Pay, o una transferencia directa a BOFA.
+          Una vez realizada da la compra debes estar atento a las fotos que te enviamos para ir haciendo tu check list.
           </p>
         </Info>
       </Card1>
       <Card2>
         <Info>
-          <h2>EL FEE DE TU COMPRA</h2>
+          <h2>Datos del envío</h2>
           <p>
-            El costo por este servicio es el <strong>%5</strong>. No incluye
-            "pick up".
-          </p>
-          <p>
-            Recuerda revisar que tus productos estén disponibles en talla y
-            color deseado.
+          Indícanos cómo quieres que sea tu envío y nosotros nos encargamos de toda la logística de tu carga.
           </p>
         </Info>
         <StepImage>
@@ -69,26 +62,9 @@ const EnLinea = () => {
           <img src={step5} alt="Step 5" />
         </StepImage>
         <Info>
-          <h2>LLEVA EL CONTROL</h2>
-          <p>
-            Una vez realizada da la compra debes estar atento a las fotos que te
-            enviamos para ir haciendo tu check list.
-          </p>
-          <p>
-            Cuando este todo los productos, nos dices como vamos a realizar tu
-            envió.
-          </p>
+          <h2>Espera la mercancia y disfruta.</h2>
         </Info>
       </Card1>
-      <Card2>
-        <Info>
-          <h2>RECIBE TU MERCANCIA</h2>
-          <p>Espera a recibir tu mercancía y disfruta.</p>
-        </Info>
-        <StepImage>
-          <img src={step6} alt="Step 6" />
-        </StepImage>
-      </Card2>
     </Container>
   );
 };
@@ -96,7 +72,6 @@ const EnLinea = () => {
 export default EnLinea;
 
 const Container = styled.div`
-  background-color: #7ffee0;
   min-height: 300px;
   display: flex;
   flex-direction: column;
@@ -105,8 +80,15 @@ const Container = styled.div`
   padding: 10px;
 `;
 
+const Title= styled.h3`
+  text-align: center;
+  width: 70%;
+  margin: 2rem;
+  color: #01A398;
+`
+
 const Card1 = styled.div`
-  background-color: #07746e;
+background-color: #07746e;
   border: 1px solid #7ffee0;
   color: white;
   width: 100%;

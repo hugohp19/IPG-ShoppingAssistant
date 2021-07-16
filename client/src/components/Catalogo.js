@@ -22,25 +22,25 @@ const Catalogo = () => {
           Comprar
         </Button>
       </Link>
+      <Title>
+      <p>Para hacer este tipo de compras contamos con catálogos digitales de Costco y Bjs.</p> <p>¡Conforma tu lista de compra!</p>
+      </Title>
       <Card1>
         <StepImage>
           <img src={step1} alt="Step 1" />
         </StepImage>
         <Info>
-          <h2>INGRESA AL PORTAL</h2>
+          <h2>Ingresa a nuestro portal</h2>
           <p>
-            Contamos con catálogos digitales de Costco y Bjs (con productos
-            refrigerados). Llénalos en línea con los productos que deseas
-            comprar.
+          Ingresa en el portal con tu usuario y código y llena en línea los productos que deseas comprar.
           </p>
         </Info>
       </Card1>
       <Card2>
         <Info>
-          <h2>ENVIA TU PEDIDO A MAS TARDAR EL VIERNES</h2>
+          <h2>Conforma tu pedido antes del viernes</h2>
           <p>
-            Recibimos pedidos hasta los días viernes, para ser comprados la
-            semana siguiente.
+          Recibimos tus pedidos hasta el día viernes, tus productos se comprarán la semana siguiente de recibir la orden.
           </p>
         </Info>
         <StepImage>
@@ -52,24 +52,17 @@ const Catalogo = () => {
           <img src={step3} alt="Step 3" />
         </StepImage>
         <Info>
-          <h2>RECIBE EL RESUMEN DE PERDIDO Y PAGO</h2>
+          <h2>Recibe el resumen del pedido y pago</h2>
           <p>
-            Verifica que estén todos los productos que solicitaste y el monto a
-            pagar que se indica al final del pedido.
+          Verifica que todos los productos del pedido estén correctos y que el monto a pagar sea el que se indica al final del pedido.
           </p>
         </Info>
       </Card1>
       <Card2>
         <Info>
-          <h2>EL FEE DE TU COMPRA</h2>
+          <h2>Reporte de compra</h2>
           <p>
-            El costo por este servicio es el <strong>10%</strong>, también entra
-            en este rubro las compras que realices de nuestro status depositando
-            el monto en el mismo momento de hacer el pedido.
-          </p>
-          <p>
-            Recuerda chequear que tus productos estén disponibles en talla y
-            color deseado.
+          El jueves o viernes luego de hacer la compra te haremos llegar un reporte con el resumen de la compra y el soporte de la factura.
           </p>
         </Info>
         <StepImage>
@@ -81,17 +74,13 @@ const Catalogo = () => {
           <img src={step5} alt="Step 5" />
         </StepImage>
         <Info>
-          <h2>REPORTE DE TU COMPRA</h2>
-          <p>
-            Entre Jueves y viernes, después de hacer la compra, te hacemos
-            llegar un reporte con lo comprado y las facturas de soporte.
-          </p>
+        <h2>Datos del envío</h2>
+          <p>Indícanos cómo quieres que sea tu envío y nosotros nos encargamos de toda la logística de tu carga.</p>
         </Info>
       </Card1>
       <Card2>
         <Info>
-          <h2>INDICA COMO QUIERES TU ENVIO</h2>
-          <p>Espera la mercancía y disfruta.</p>
+          <h2>Espera la mercancia y disfruta</h2>
         </Info>
         <StepImage>
           <img src={step6} alt="Step 6" />
@@ -117,7 +106,6 @@ const Catalogo = () => {
 export default Catalogo;
 
 const Container = styled.div`
-  background-color: #f5c0e1;
   min-height: 300px;
   display: flex;
   flex-direction: column;
@@ -125,6 +113,14 @@ const Container = styled.div`
   align-items: center;
   padding: 10px;
 `;
+
+const Title= styled.h3`
+  text-align: center;
+  width: 70%;
+  margin: 2rem 0;
+  color: #01A398;
+`
+
 const Card1 = styled.div`
   background-color: #d9b4d6;
   border: 1px solid purple;

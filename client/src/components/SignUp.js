@@ -53,8 +53,8 @@ const SignUp = () => {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     try {
-      // const response = await axios.post(`${process.env.REACT_APP_API_URL}/`, userInfo);
-      const response = await axios.post(`/api/`, userInfo);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/`, userInfo);
+      // const response = await axios.post(`/api/`, userInfo);
       console.log(response)
       localStorage.setItem('user', JSON.stringify(response.data));
       history.push('/catalogo');

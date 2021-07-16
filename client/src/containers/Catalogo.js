@@ -28,8 +28,8 @@ const Catalogo = () => {
     console.log(orderInfo);
 
     try {
-      // await axios.post(`${process.env.REACT_APP_API_URL}/orders/addorder`, orderInfo);
-      await axios.post(`/api/orders/addorder`, orderInfo);
+      await axios.post(`${process.env.REACT_APP_API_URL}/orders/addorder`, orderInfo);
+      // await axios.post(`/api/orders/addorder`, orderInfo);
       swal("Orden Ingresada Exitosamente!", {
         icon: "success",
       }).then(() => {

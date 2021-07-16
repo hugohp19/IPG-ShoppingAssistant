@@ -106,8 +106,8 @@ const UploadData = () => {
       if (!photoUrl) return;
       const productDataToUpload = {...productData, photo: photoUrl}
       console.log(productDataToUpload)
-      // await axios.post(`${process.env.REACT_APP_API_URL}/products/addproduct`, productDataToUpload)
-      await axios.post(`/api/products/addproduct`, productDataToUpload)
+      await axios.post(`${process.env.REACT_APP_API_URL}/products/addproduct`, productDataToUpload)
+      // await axios.post(`/api/products/addproduct`, productDataToUpload)
      
       console.log("success");
       swal("Producto Agregado!", {

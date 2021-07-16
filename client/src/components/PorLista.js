@@ -10,26 +10,28 @@ import step6 from "../assets/images/porlista/step6.jpg";
 const PorLista = () => {
   return (
     <Container>
+      <Title>
+      <p>Esta modalidad funciona para compras en Walmart o Dollar Tree. Si sabes en detalle los productos que quieres comprar pero no están en internet esta es tu opción.</p>
+      </Title>
       <Card1>
         <StepImage>
           <img src={step1} alt="Step 1" />
         </StepImage>
         <Info>
-          <h2>ESTA MODALIDAD FUNCIONA PARA "WALMART" O "DOLLAR TREE"</h2>
+          <h2>Formato de lista</h2>
           <p>
-            Es para productos que ya sabes cuales son y tienes el detalle, pero
-            no se pueden comprar por internet. También funciona para otras
-            tiendas pero Walmart y Dollar Tree son las mas comunes.
+          Solicítanos el formato de lista, llénalo y énvialo a compras@grupoigg2000.com
+          </p>
+          <p>
+          Si son productos muy específicos recuerda siempre enviarnos una foto para nuestra referencia.
           </p>
         </Info>
       </Card1>
       <Card2>
         <Info>
-          <h2>ENVIA LA LISTA CON LOS PRODUCTOS</h2>
+          <h2>Realiza tu pago</h2>
           <p>
-            Pídenos el formato de lista, llénala y envíala a
-            compras@grupoipg2000.com. Recomendamos enviar fotos si son productos
-            muy específicos.
+          Verifica que todos los productos estén correctos y procede al pago vía Zelle, PayPal, Apple Pay, o una transferencia directa a BOFA.
           </p>
         </Info>
         <StepImage>
@@ -41,23 +43,17 @@ const PorLista = () => {
           <img src={step3} alt="Step 3" />
         </StepImage>
         <Info>
-          <h2>REALIZA TU PAGO</h2>
+          <h2>Reporte de compra</h2>
           <p>
-            Verifica que todos los productos estén correctos y procede al pago
-            vía Zelle, PayPal, Apple Pay, o una transferencia directa a BOFA.
+          El jueves o viernes luego de hacer la compra te haremos llegar un reporte con el resumen de la compra y el soporte de la factura.
           </p>
         </Info>
       </Card1>
       <Card2>
         <Info>
-          <h2>EL FEE DE TUS COMPRAS</h2>
+          <h2>Datos del envío</h2>
           <p>
-            El costo por este servicio es el 13%. El fee mínimo es de $13 para
-            compras menores de $100.
-          </p>
-          <p>
-            En caso de que tu producto no se encuentre disponible, nos puedes
-            autorizar para remplazarlo por uno similar en calidad y precio.
+          Indícanos cómo quieres que sea tu envío y nosotros nos encargamos de toda la logística de tu carga.
           </p>
         </Info>
         <StepImage>
@@ -69,24 +65,9 @@ const PorLista = () => {
           <img src={step5} alt="Step 5" />
         </StepImage>
         <Info>
-          <h2>TE PASAMOS EL REPORTE</h2>
-          <p>
-            Entre Jueves y viernes, después de hacer la compra, te hacemos
-            llegar un reporte con lo comprado y las facturas de soporte.
-          </p>
+          <h2>Espera la mercancia y disfruta</h2>
         </Info>
       </Card1>
-      <Card2>
-        <Info>
-          <h2>LISTO PARA EL ENVIO</h2>
-          <p>
-            Déjanos saber como quieres tu envio. Espera tu compra y disfruta.
-          </p>
-        </Info>
-        <StepImage>
-          <img src={step6} alt="Step 6" />
-        </StepImage>
-      </Card2>
     </Container>
   );
 };
@@ -94,7 +75,6 @@ const PorLista = () => {
 export default PorLista;
 
 const Container = styled.div`
-  background-color: #499d67;
   min-height: 300px;
   display: flex;
   flex-direction: column;
@@ -102,6 +82,13 @@ const Container = styled.div`
   align-items: center;
   padding: 10px;
 `;
+
+const Title= styled.h3`
+  text-align: center;
+  width: 70%;
+  margin: 2rem;
+  color: #01A398;
+`
 
 const Card1 = styled.div`
   background-color: #04413e;

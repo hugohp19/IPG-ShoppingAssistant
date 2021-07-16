@@ -42,6 +42,7 @@ exports.createUser = async (req, res) => {
 // ***********************************************//
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
+  console.log('inside function')
   try {
     const user = await User.findByCredentials(email, password);
     const token = await user.generateAuthToken();
