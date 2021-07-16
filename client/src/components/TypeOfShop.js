@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import { stepsByType } from "../assets/stepsByType";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import Formulario from "./Formulario";
 
 const TypeOfShop = (props) => {
   const { type } = props;
+  const [open, setOpen] = useState(false);
   const history = useHistory();
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Container>
@@ -52,11 +61,12 @@ const TypeOfShop = (props) => {
               textDecoration: "none",
               color: 'white',
             }}
-            onClick={(e)=>{history.push('/catalogo')}}
+            onClick={handleClickOpen}
           >
             <ShoppingCartIcon />
             Formulario
           </Button>}
+          <Formulario open={open} handleClose={handleClose}/>
         </BtnContainer>
       </RightContainer>
     </Container>
