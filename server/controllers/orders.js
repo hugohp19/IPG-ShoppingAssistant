@@ -1,14 +1,10 @@
 const Order = require("../db/models/order");
+const { sendOrder } = require("../mail/index")
 
 exports.createOrder = async (req, res) => {
-  console.log(req.body);
-  console.log(req.user);
   const owner = req.user._id;
   const { store, ...order } = req.body;
-  console.log("owner: ", owner);
-  console.log("store: ", store);
   const orderArray = Object.values(order);
-  console.log("order: ", orderArray);
 
   try {
     const newOrder = await new Order({
@@ -16,11 +12,25 @@ exports.createOrder = async (req, res) => {
       store,
       order: orderArray
     });
-    console.log("newOrder: ", newOrder);
     await newOrder.save();
     let user = req.user;
+
     user.orders = user.orders.concat(newOrder._id);
     await user.save();
+    const recentOrder = await Order.find({
+      _id: newOrder._id,
+    }).populate({
+      path: "order",
+      populate: {
+        path: "product",
+        select: {
+          name: 1,
+          price: 1,
+          store: 1,
+        }
+      },
+    });
+    //sendOrder(req.user.email, req.user.firstName, recentOrder[0].order)
     res.status(200).send(newOrder);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -28,18 +38,12 @@ exports.createOrder = async (req, res) => {
 };
 
 exports.getOrders = async (req, res) => {
-
-  console.log('****************************');
-  console.log(req.user.admin);
   if (!req.user.admin) {
     res.status(401).send("Authorization Required");
   } else {
     const today = new Date();
     today.setDate(today.getDate());
     const { startOfWeek, endOfWeek } = await getActiveWeek(today);
-    console.log( startOfWeek, endOfWeek)
-    // console.log("startOfWeek: ", startOfWeek);
-    // console.log("endOfWeek: ", endOfWeek);
     try {
       const orders = await Order.find({
         createdAt: { $gte: startOfWeek, $lte: endOfWeek },
@@ -60,7 +64,6 @@ exports.getOrders = async (req, res) => {
             path: "product",
           },
         });
-      // console.log('newOrder: ', orders)
       res.status(200).send(orders);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -69,15 +72,12 @@ exports.getOrders = async (req, res) => {
 };
 
 exports.getAllOrders = async (req, res) => {
-  console.log(req.user.admin);
   if (!req.user.admin) {
     res.status(401).send("Authorization Required");
   } else {
     const today = new Date();
     today.setDate(today.getDate());
     const { startOfWeek, endOfWeek } = getActiveWeek(today);
-    // console.log("startOfWeek: ", startOfWeek);
-    // console.log("endOfWeek: ", endOfWeek);
     try {
       const orders = await Order.find({
         createdAt: { $gte: startOfWeek, $lte: endOfWeek },
@@ -99,7 +99,6 @@ exports.getAllOrders = async (req, res) => {
             path: "product",
           },
         });
-      // console.log('newOrder: ', orders)
       res.status(200).send(orders);
     } catch (error) {
       res.status(400).json({ error: error.message });

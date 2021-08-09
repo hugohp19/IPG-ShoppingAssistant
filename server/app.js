@@ -10,7 +10,6 @@ const express = require('express'),
   cookieParser = require('cookie-parser'),
   path = require('path')
   cors = require('cors');
-  console.log('options', process.env.CORS_ORIGIN_URL)
   const corsOptions ={
     origin: process.env.CORS_ORIGIN_URL, 
     credentials:true,            //access-control-allow-credentials:true

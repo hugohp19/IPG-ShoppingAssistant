@@ -34,7 +34,6 @@ export default function DropDownMenu() {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  console.log(currentUser);
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
@@ -43,17 +42,13 @@ export default function DropDownMenu() {
   };
 
   async function handleLogout() {
-    console.log(currentUser);
-    // console.log(JSON.parser(sessionStorage.getItem('user')));
-
     try {
       const response = await axios({
         method: "POST",
-        // url: `${process.env.REACT_APP_API_URL}/users/logout`,
         url: `/api/users/logout`,
+        // url: `/api/users/logout`,
         withCredentials: true,
       });
-      console.log(response);
       setCurrentUser(null);
       localStorage.removeItem("user");
       // await logout();

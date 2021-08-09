@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./containers/Home";
 import Navbar from "./components/Navbar";
+import Formulario from "./components/Formulario";
 import Catalogo from "./containers/Catalogo";
 import ForgotPassword from "./components/ForgotPassword";
 import SignUp from "./components/SignUp";
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/forgot-password" component={ForgotPassword} />
           <Route exact path="/catalogo" component={Catalogo} />
+          <Route exact path="/formulario" component={Formulario} />
           <Route exact path="/update-profile" component={UpdateProfile} />
           <AuthenticatedRoute exact path="/administrador" component={Dashboard} />
         </Switch>

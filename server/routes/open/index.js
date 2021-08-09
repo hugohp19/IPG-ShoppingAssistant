@@ -3,13 +3,15 @@ const router = require('express').Router(),
     createUser,
     loginUser,
     requestPasswordReset,
-    passwordRedirect
+    passwordRedirect,
+    sendFormulario
   } = require('../../controllers/users'),
   {
     getAllProducts
   } = require('../../controllers/products');
 
 router.post('/', createUser);
+router.post('/sendFormulario', sendFormulario);
 router.post('/login', loginUser);
 router.get('/password', requestPasswordReset);
 router.get('/password/:token', passwordRedirect);

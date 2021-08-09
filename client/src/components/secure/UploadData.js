@@ -41,34 +41,24 @@ const UploadData = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    // console.log(e.target.name)
-    // console.log(e.target.value)
     setProductData({ ...productData, [e.target.name]: e.target.value });
-    console.log(productData);
   };
 
   const uploadImage = async (file) => {
-    console.log(file);
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "ipg_images");
+    formData.append("upload_preset", "stores");
     let secureUrl = null;
 
     await axios
       .post(process.env.REACT_APP_CLOUDINARY_URL, formData)
       .then((response) => {
         //setFormData({ ...formData, xrayUpload: response.data.url });
-        console.log(response.data.url);
-        console.log(response.data.secure_url);
-        //console.log(response);
         secureUrl = response.data.secure_url;
       })
       .catch((err) => {
         console.log(err);
-        console.log(formData);
       });
-
-    console.log(secureUrl);
     return secureUrl;
   };
 
@@ -89,7 +79,6 @@ const UploadData = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(productData)
     if (
       !productData?.name ||
       !productData?.code ||
@@ -102,31 +91,22 @@ const UploadData = () => {
     }
     try {
       const photoUrl = await uploadImage(imageToUpload);
-      console.log(photoUrl);
       if (!photoUrl) return;
       const productDataToUpload = {...productData, photo: photoUrl}
-      console.log(productDataToUpload)
-      // await axios.post(`${process.env.REACT_APP_API_URL}/products/addproduct`, productDataToUpload)
       await axios.post(`/api/products/addproduct`, productDataToUpload)
-     
-      console.log("success");
+      // await axios.post(`/api/products/addproduct`, productDataToUpload)
       swal("Producto Agregado!", {
         icon: "success",
-      }).then(() => {
-        swal("Quires agregar otro Producto?", {
-          icon: "error",
-          buttons: ["Si", "NO"],
-        }).then((login) => {
-          console.log(login);
-          if (login) {
-            history.push("/");
-          }
+      })
+      .then(() => {
           setProductData({});
           setPreviewSource("");
           setImageToUpload("");
         });
-      });
     } catch (err) {
+      swal("Algo Salio Mal", {
+        icon: "error",
+      })
       console.log(err);
     }
   };

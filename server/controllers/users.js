@@ -6,7 +6,8 @@ isAdmin = require('../middleware/authorization/index'), ///try to implement isAd
   //   sendCancellationEmail,
   //   forgotPasswordEmail
   // } = require('../emails/index'),
-  jwt = require('jsonwebtoken');
+  jwt = require('jsonwebtoken'),
+  {sendForm} = require('../mail/index')
 
 
   // ***********************************************//
@@ -185,9 +186,6 @@ exports.getAllUsers = async (req, res) => {
 // Logout a user
 // ***********************************************//
 exports.logoutUser = async (req, res) => {
-  console.log('--------LOGOUT ENTER--------')
-  console.log(req.user)
-  console.log('--------LOGOUT EXIT--------')
   try {
     req.user.tokens = req.user.tokens.filter((token) => {
       return token.token !== req.cookies.jwt;
@@ -254,5 +252,16 @@ exports.updatePassword = async (req, res) => {
     res.status(200).json({ message: 'password updated successfully!' });
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+};
+
+
+exports.sendFormulario = async (req, res) => {
+  //const { firstName, lastName, email, password, phoneNumber } = req.body;
+  try {
+    sendForm(req.body)
+    res.status(200).json({message: 'Email sent'});
+  } catch (e) {
+    res.status(400).json({ error: e.toString() });
   }
 };

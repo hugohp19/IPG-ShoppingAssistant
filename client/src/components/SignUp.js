@@ -47,7 +47,6 @@ const SignUp = () => {
   const handleChange = (e) =>{
     e.preventDefault();
     setUserInfo({...userInfo, [e.target.name]: e.target.value})
-    console.log(userInfo)
   }
 
   const handleSubmit = async (e) =>{
@@ -55,7 +54,6 @@ const SignUp = () => {
     try {
       // const response = await axios.post(`${process.env.REACT_APP_API_URL}/`, userInfo);
       const response = await axios.post(`/api/`, userInfo);
-      console.log(response)
       localStorage.setItem('user', JSON.stringify(response.data));
       history.push('/catalogo');
       // })

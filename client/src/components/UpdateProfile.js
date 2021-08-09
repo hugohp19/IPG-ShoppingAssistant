@@ -22,8 +22,6 @@ const UpdateProfile = () => {
   const [loading, setLoading ] = useState(false);
   const history = useHistory();
 
-  console.log(currentUser)
-
   const useStyles = makeStyles((theme) => ({
     paper: {
       marginTop: theme.spacing(8),
@@ -49,7 +47,6 @@ const UpdateProfile = () => {
   const handleChange = (e) =>{
     e.preventDefault();
     setUserInfo({...userInfo, [e.target.name]: e.target.value})
-    console.log(userInfo)
   }
 
   const handleSubmit = async (e) =>{

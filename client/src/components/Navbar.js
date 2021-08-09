@@ -1,6 +1,6 @@
 import React, { useContext} from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/images/IPG.png';
+import logo from '../assets/images/logoIPG-192x192.png';
 import styled from 'styled-components';
 import { AuthContext } from '../context/AuthContext';
 import DropDownMenu from './DropDownMenu';
@@ -34,15 +34,23 @@ export default Navbar;
 
 const Container = styled.div`
   width: 100%; 
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 0;
 `
 const LogoContainer = styled.div`
-  padding: 0 20px;
+  padding: 0 1em;
+  height: 100%;
+
+  a{
+    height: 100%;
+    display: flex;
+    align-items: center; 
+  }
+
   img{
-    width: 150px;
+    width: 40px;
   }
 `
 
