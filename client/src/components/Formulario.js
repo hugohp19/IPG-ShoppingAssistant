@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -10,6 +10,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import ContactMailIcon from "@material-ui/icons/ContactMail";
 import TextField from "@material-ui/core/TextField";
+import swal from 'sweetalert';
+import axios from 'axios';
 
 const styles = (theme) => ({
   root: {
@@ -67,6 +69,37 @@ const useStylesSecondary = makeStyles((theme) => ({
 export default function Formulario({ open, handleClose }) {
   const classes = useStylesSecondary();
 
+  const [userInfo, setUserInfo] = useState({})
+  const [userError, setUserError] = useState({})
+
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+  const handelChange = (e, type) =>{
+    setUserInfo({...userInfo, [type]: e.target.value})
+  }
+  const handelSubmit = (e, type) =>{
+    if(!userInfo.nombre || !userInfo.apellido || !userInfo.telefono || !userInfo.tienda || !userInfo.presupuesto || !userInfo.nota){
+      console.log('info missing')
+      return;
+    } 
+
+    if(!validateEmail(userInfo.email)){
+      swal({ text: 'Invalid Email', icon: "error"});
+      return;
+    }
+
+    try{
+      axios.post('/api/sendFormulario', userInfo);
+      handleClose();
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+
   return (
     <div >
       <Dialog
@@ -80,33 +113,36 @@ export default function Formulario({ open, handleClose }) {
         <DialogContent dividers >
           <form className={classes.root} noValidate autoComplete="off">
             <div style={{display: 'flex', flexDirection: 'column'}}>
-              <TextField required id="standard-required" label="Nombre" />
-              <TextField required id="standard-required" label="Apellido" />
-              <TextField required id="standard-required" label="Email" />
-              <TextField required id="standard-required" label="Telefono" />
+              <TextField required id="standard-required" label="Nombre" onChange={(e)=>handelChange(e, 'nombre')}/>
+              <TextField required id="standard-required" label="Apellido" onChange={(e)=>handelChange(e, 'apellido')} />
+              <TextField required id="standard-required" label="Email" onChange={(e)=>handelChange(e, 'email')} />
+              <TextField required id="standard-required" label="Telefono" onChange={(e)=>handelChange(e, 'telefono')} />
               <TextField
                 required
                 id="standard-required"
                 label="Tienda"
                 placeholder="Tienda de donde quieren las compras"
+                onChange={(e)=>handelChange(e, 'tienda')} 
               />
               <TextField
                 required
                 id="standard-required"
                 label="Presupuesto"
                 placeholder="Presupuesto estimado para la compra"
+                onChange={(e)=>handelChange(e, 'presupuesto')} 
               />
               <TextField
                 id="standard-multiline-static"
                 label="Nota"
                 multiline
                 rows={4}
+                onChange={(e)=>handelChange(e, 'nota')} 
               />
             </div>
           </form>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button autoFocus onClick={handelSubmit} color="primary">
             Enviar
           </Button>
         </DialogActions>

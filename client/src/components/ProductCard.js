@@ -14,14 +14,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 
 const ProductCard = ({data, updateState, handleChange, value}) => {
-  //console.log(data)
-  //console.log(value)
-  // console.log(data.name)
-  // console.log(data.photo)
-  // console.log(typeof(data.name))
-  // console.log(typeof(data.photo))
-  // console.log(typeof(data.id))
-
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -34,16 +26,6 @@ const ProductCard = ({data, updateState, handleChange, value}) => {
 
   const classes = useStyles();
   const [ cantidad, setCantidad ] = useState();
-
-  // const handleChange = (e) => {
-  //   // e.preventDefault();
-
-  //   // console.log(e.target)
-  //   // console.log(e)
-  //   console.log({productId: e.target.name, quantity: e.target.value})
-  //   setCantidad('hello');
-  //   console.log(cantidad)
-  // };
 
   return (
   <Card style={{width: '300px'}}>

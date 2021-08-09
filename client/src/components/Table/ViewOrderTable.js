@@ -29,15 +29,12 @@ const rows = [
 
 export default function ViewOrderTable( {data}) {
   const classes = useStyles();
-  console.log(data)
   const organizeData = data.map((order)=>{
     const sortedOrders = order.order.sort((a,b)=>{
       return a.product.code - b.product.code
     })
     return {...order, order: sortedOrders}
   })
-
-  console.log(organizeData)
 
   return (
     <>

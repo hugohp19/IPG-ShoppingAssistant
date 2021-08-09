@@ -50,25 +50,19 @@ const Login = () => {
     e.preventDefault();
     let userId;
     try {
-      console.log('inside login')
       const user = await axios({
         method: 'POST',
-        url: `${process.env.REACT_APP_API_URL}/login`,
+        url: `/api/login`,
         // url: `/api/login`,
         data: userInfo,
         withCredentials: "include",
         }
       )
-      console.log('user: ', user)
       setCurrentUser(user.data)
       localStorage.setItem('user', JSON.stringify(user.data));
-      console.log(user.data)
       setLoading(true);
-     // console.log(JSON.parse(sessionStorage.getItem('user')))
       history.push('/catalogo');
     } catch (error) {
-      console.log(error)
-      console.log('Failed to Log In');
       swal({
         icon: "error",
         text: "Email or Password incorrect",

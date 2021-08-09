@@ -3,8 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 function AuthenticatedRoute({component: Component, ...rest}){
   const user = JSON.parse(localStorage.getItem('user'))
-  console.log('uswer: ', user)
-  // console.log(currentUser.admin)
+  
   return(
     <Route
       {...rest}

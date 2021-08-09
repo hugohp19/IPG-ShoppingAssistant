@@ -74,7 +74,6 @@ export default function Dashboard() {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/orders/orders`);
       // const response = await axios.get(`/api/orders/orders`);
-      console.log(response.data);
       setOrders(response.data);
     } catch (error) {
       console.log(error);
@@ -87,43 +86,29 @@ export default function Dashboard() {
 
   function getDataTable(data) {
     let compiledData = [];
-    console.log(data);
-    console.log(orders);
     data.map((order) => {
-      console.log(order);
       delete order.isActive;
       delete order.orderTime;
       delete order.userId;
       compiledData = [...compiledData, ...Object.values(order)];
     });
-
-    console.log(compiledData);
     let formatedDate = {};
-    let formatedDataToArray = [];
     compiledData.map((item) => {
-      console.log(item);
       if (formatedDate[item.id]) {
         formatedDate[item.id] = formatedDate[item.id] + item.quantity;
       } else {
         formatedDate[item.id] = item.quantity;
       }
     });
-    console.log(formatedDate);
     const newData = Object.entries(formatedDate);
-    console.log(newData);
 
     let prueba = [];
-    console.log(productos);
-    console.log(productList);
+
     newData.map((item) => {
-      console.log(item[0]);
-      console.log(productos[item[0]]);
       prueba = [
         ...prueba,
         { ...productList[item[0]], quantity: item[1], id: item[0] },
       ];
-      // prueba = [...prueba,
-      //   {[item[0]]: {...productos[item[0]], quantity: item[1]} }]
     });
     setTableData(prueba);
   }

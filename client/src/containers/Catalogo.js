@@ -22,13 +22,10 @@ const Catalogo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userProducts);
-    console.log(currentUser);
     const orderInfo = { ...userProducts, store: "costco" };
-    console.log(orderInfo);
 
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/orders/addorder`, orderInfo);
+      await axios.post(`/api/orders/addorder`, orderInfo);
       // await axios.post(`/api/orders/addorder`, orderInfo);
       swal("Orden Ingresada Exitosamente!", {
         icon: "success",
@@ -37,7 +34,6 @@ const Catalogo = () => {
         history.push("/");
       });
     } catch (err) {
-      console.log(err);
       if (!currentUser) {
         swal("Debes hacer Login Primero", {
           icon: "error",
@@ -61,7 +57,6 @@ const Catalogo = () => {
       ...userProducts,
       [e.target.name]: { product: e.target.name, quantity: e.target.value },
     });
-    // console.log(userProducts);
   };
 
   const getProducts = async () => {
@@ -72,8 +67,6 @@ const Catalogo = () => {
         url: `/api/getproducts`,
         withCredentials: "include",
       })
-        
-      console.log(products.data);
       setProductos(products.data);
     } catch (err) {
       console.log(err);

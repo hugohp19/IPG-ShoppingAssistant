@@ -9,8 +9,6 @@ export function AppContextProvider({children}){
   const [ userProducts, setUserProducts] = useState([])
 
   useEffect(() => {
-    console.log('user Auth: ', user)
-    console.log('currentUser Auth: ', currentUser)
     let some;
     if (user && !currentUser) {
       axios.get(`${process.env.REACT_APP_API_URL}/users/me`, {
@@ -18,7 +16,6 @@ export function AppContextProvider({children}){
           withCredentials: true
         })
         .then(({ data }) => {
-          console.log(data)
           some = data
           setCurrentUser(()=> data);
         })
@@ -27,7 +24,6 @@ export function AppContextProvider({children}){
         
        //swal(`Oops!`, error.toString());
       });
-      console.log('after: ', some)
     }else{
       console.log('auth else')
     }

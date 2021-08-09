@@ -3,7 +3,6 @@ import ReactExport from "react-export-excel";
 import styled from 'styled-components';
 
 export default function DownloadExcel({ data }) {
-  console.log(data);
   const ExcelFile = ReactExport.ExcelFile;
   const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
   const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
@@ -41,13 +40,10 @@ export default function DownloadExcel({ data }) {
         price: item.product.price,
       };
     });
-    console.log(dataToExcel);
     arrayData = [...arrayData, ...dataToExcel];
     return dataToExcel;
   });
 
-  console.log(newData);
-  console.log(arrayData);
   return (
     <div>
       <ExcelFile element={<Button>Export to Excel</Button>}>

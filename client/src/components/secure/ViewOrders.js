@@ -10,8 +10,6 @@ const ViewOrders = () => {
 
   const todayDate = new Date();
   todayDate.setDate(todayDate.getDate() - 5);
-  console.log(todayDate);
-  console.log(moment(todayDate).format());
   const timeTemp = moment(todayDate).format();
 
 
