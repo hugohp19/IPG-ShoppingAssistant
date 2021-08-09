@@ -5,9 +5,9 @@ import PorLista from './PorLista';
 import EnLinea from './EnLinea';
 import Asistida from './Asistida';
 
-import CatalogoLogo from '../assets/images/Compracatálogo-min.png';
+import CatalogoLogo from '../assets/images/Compracataalogo-min.png';
 import AsistidaLogo from '../assets/images/Compraasistida-min.png';
-import LineaLogo from '../assets/images/Compraenlínea-min.png';
+import LineaLogo from '../assets/images/Compraenlinea-min.png';
 import ListaLogo from '../assets/images/Compralista-min.png';
 
 import TypeOfShop from './TypeOfShop';
