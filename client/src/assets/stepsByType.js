@@ -1,4 +1,4 @@
-import catalogo from "../assets/images/Compracatálogo-min.png";
+import catalogo from "../assets/images/Compracatalogo-min.png";
 import asistida from "../assets/images/Compraasistida-min.png";
 import lista from "../assets/images/Compralista-min.png";
 import linea from "../assets/images/Compraenlínea-min.png";
