@@ -6,8 +6,9 @@ try {
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false
-  });
-  console.log('MongoDB has been connected!');
+  }).then(()=>
+    console.log('MongoDB has been connected!')
+  )
 } catch (error) {
   console.log(`Error: ${error}`);
 }

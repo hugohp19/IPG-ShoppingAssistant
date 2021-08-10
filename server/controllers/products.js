@@ -19,7 +19,7 @@ exports.createProduct = async (req, res) => {
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    res.status(201).json(products);
+    res.status(200).json(products);
   } catch (e) {
     res.status(400).json({ error: e.toString() });
   }
