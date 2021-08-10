@@ -5,7 +5,7 @@ import PorLista from './PorLista';
 import EnLinea from './EnLinea';
 import Asistida from './Asistida';
 
-import CatalogoLogo from '../assets/images/Compracataalogo-min.png';
+import CatalogoLogo from '../assets/images/Compracatalogo-min.png';
 import AsistidaLogo from '../assets/images/Compraasistida-min.png';
 import LineaLogo from '../assets/images/Compraenlinea-min.png';
 import ListaLogo from '../assets/images/Compralista-min.png';
