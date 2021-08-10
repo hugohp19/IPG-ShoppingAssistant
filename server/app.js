@@ -9,13 +9,13 @@ const express = require('express'),
   // fileUpload = require('express-fileupload'),
   cookieParser = require('cookie-parser'),
   path = require('path')
-  cors = require('cors');
-  const corsOptions ={
-    origin: process.env.CORS_ORIGIN_URL, 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+  // cors = require('cors');
+//   const corsOptions ={
+//     origin: process.env.CORS_ORIGIN_URL, 
+//     credentials:true,            //access-control-allow-credentials:true
+//     optionSuccessStatus:200
+// }
+// app.use(cors(corsOptions));
 
 // Parse incoming JSON into objects
 app.use(express.json());
