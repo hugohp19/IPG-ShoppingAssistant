@@ -6,7 +6,6 @@ const express = require('express'),
   productsRouter = require('./routes/secure/products'),
   ordersRouter = require('./routes/secure/orders'),
   passport = require('./middleware/authentication/index'),
-  // fileUpload = require('express-fileupload'),
   cookieParser = require('cookie-parser'),
   path = require('path')
   // cors = require('cors');
