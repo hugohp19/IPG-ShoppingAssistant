@@ -96,9 +96,12 @@ const Intro = styled.div`
 const OptionsContainer = styled.div`
   margin: 3em;
   display: flex;
-  height: 500px;
-  // background-color: red;
+  max-height: 500px;
   border: 2px solid #51b1b8;
+
+  @media only screen and (max-width: 500px) {
+    margin: 0.5em;
+  }
 `
 
 const OptionsButtons = styled.div`
@@ -113,9 +116,18 @@ const OptionsButtons = styled.div`
     font-size: 2rem;
     border: 1px solid #51B1B8;
     cursor: pointer;
+    min-width: 120px;
 
     &:hover{
       color: #51B1B8;
+    }
+
+    @media (max-width: 1000px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 500px) {
+      font-size: 1rem;
     }
   }
 
@@ -164,10 +176,15 @@ const OptionsButtons = styled.div`
     justify-content: space-evenly;
     flex-wrap: nowrap;
     gap: 0;
+    width: min-content;
 
     .btn{
       border: 1px solid #ffff;
     }
+  }
+
+  @media only screen and (max-width: 700px) {
+    width: min-content;
   }
 
 `

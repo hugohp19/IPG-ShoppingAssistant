@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import styled from "styled-components";
 import ProductCard from "../components/ProductCard";
-import Banner from "../assets/images/catalogo/catalogoBanner.png";
+import Banner from "../assets/images/Compracatalogo-min.png";
 import { AuthContext } from "../context/AuthContext";
 import Button from "@material-ui/core/Button";
 import swal from "sweetalert";
@@ -122,7 +122,8 @@ const CatalogoContainer = styled.div`
 `;
 const CatalogoBanner = styled.div`
   img {
-    width: 80%;
+    width: 100%;
+    background-size: cover
   }
   margin: 30px;
   max-height: 200px;

@@ -33,7 +33,8 @@ const TypeOfShop = (props) => {
             stepsByType[type].steps.map((data) => {
               return (
                 <Tooltip title={data.description} arrow placement="right">
-                  <Button>{`${data.step} ${data.text}`}</Button>
+                  <p style={{fontSize: '0.8rem', fontWeight: '600'}}
+            >{`${data.step} ${data.text}`}</p>
                 </Tooltip>
               );
             })}
@@ -78,12 +79,12 @@ export default TypeOfShop;
 const Container = styled.div`
   height: 100%;
   display: flex;
-  // border: 2px solid #51b1b8;
 `;
 
 const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const BtnContainer = styled.div`
@@ -93,10 +94,15 @@ const BtnContainer = styled.div`
 
 const ShopLogo = styled.div`
   height: 100%;
+  max-height: 500px;
   border-right: 1px solid #f0f4ff;
 
   img {
     height: 100%;
+  }
+
+  @media (max-width: 1000px) {
+    display: none;
   }
 `;
 
@@ -115,10 +121,6 @@ const Steps = styled.div`
     margin-bottom: 1em;
   }
 
-  h4 {
-    font-size: 0.9rem;
-    margin-top: 0.8rem;
-  }
   p {
     font-size: 0.8rem;
     margin-bottom: 1em;
