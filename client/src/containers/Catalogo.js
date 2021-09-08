@@ -22,8 +22,14 @@ const Catalogo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!userProducts || Object.keys(userProducts).length < 1){ 
+      console.log('hello')
+      swal("Debes seleccionar algun producto", {
+        icon: "warning",
+      });
+      return
+    }
     const orderInfo = { ...userProducts, store: "costco" };
-
     try {
       await axios.post(`/api/orders/addorder`, orderInfo);
       // await axios.post(`/api/orders/addorder`, orderInfo);
@@ -52,9 +58,27 @@ const Catalogo = () => {
   };
 
   const handleChange = (e) => {
+    console.log('state: ', userProducts)
     e.preventDefault();
+    const tempProductObject = userProducts;
+    console.log('initial: ', tempProductObject)
+    if(e.target.value === 0){
+      if(tempProductObject[e.target.name]){
+        delete tempProductObject[e.target.name]
+        setUserProducts({
+          ...tempProductObject
+        });
+        console.log('after deleting: ', tempProductObject)
+        return;
+      } else{
+        return;
+      }
+    }
+    console.log('updated State before setting ', {...tempProductObject,
+      [e.target.name]: { product: e.target.name, quantity: e.target.value },
+    })
     setUserProducts({
-      ...userProducts,
+      ...tempProductObject,
       [e.target.name]: { product: e.target.name, quantity: e.target.value },
     });
   };

@@ -16,6 +16,7 @@ import axios from "axios";
 import HomeIcon from "@material-ui/icons/Home";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
+import Catalogo from "../components/secure/Catalogo";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -126,6 +127,7 @@ export default function Dashboard() {
         >
           <Tab label="Ver Orden" />
           <Tab label="Agregar Producto" />
+          <Tab label="Catalogo" />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -133,6 +135,9 @@ export default function Dashboard() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <UploadData />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <Catalogo />
       </TabPanel>
     </DashboardContainer>
   );
