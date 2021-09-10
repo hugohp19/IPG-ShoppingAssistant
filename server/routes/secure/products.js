@@ -5,6 +5,6 @@ const router = require('express').Router(),
   } = require('../../controllers/products');
 
 router.post('/addproduct', createProduct);
-router.post('/updateproduct', updateProduct);
+router.put('/updateproduct', updateProduct);
 
 module.exports = router;
