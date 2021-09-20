@@ -48,18 +48,18 @@ const UploadData = () => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "stores");
-    let secureUrl = null;
+    let imageData = {};
 
     await axios
       .post(process.env.REACT_APP_CLOUDINARY_URL, formData)
       .then((response) => {
         //setFormData({ ...formData, xrayUpload: response.data.url });
-        secureUrl = response.data.secure_url;
+        imageData = {secureUrl: response.data.secure_url, photoId: response.data.public_id};
       })
       .catch((err) => {
         console.log(err);
       });
-    return secureUrl;
+    return imageData;
   };
 
   const previewFile = (file) => {
@@ -75,7 +75,6 @@ const UploadData = () => {
     setImageToUpload(file);
     previewFile(file);
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,23 +89,22 @@ const UploadData = () => {
       return;
     }
     try {
-      const photoUrl = await uploadImage(imageToUpload);
-      if (!photoUrl) return;
-      const productDataToUpload = {...productData, photo: photoUrl}
-      await axios.post(`/api/products/addproduct`, productDataToUpload)
+      const photoData = await uploadImage(imageToUpload);
+      if (!photoData) return;
+      const productDataToUpload = { ...productData, photo: photoData.secureUrl, photoId: photoData.photoId };
+      await axios.post(`/api/products/addproduct`, productDataToUpload);
       // await axios.post(`/api/products/addproduct`, productDataToUpload)
       swal("Producto Agregado!", {
         icon: "success",
-      })
-      .then(() => {
-          setProductData({});
-          setPreviewSource("");
-          setImageToUpload("");
-        });
+      }).then(() => {
+        setProductData({});
+        setPreviewSource("");
+        setImageToUpload("");
+      });
     } catch (err) {
       swal("Algo Salio Mal", {
         icon: "error",
-      })
+      });
       console.log(err);
     }
   };

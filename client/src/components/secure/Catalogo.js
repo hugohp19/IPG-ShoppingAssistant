@@ -4,11 +4,12 @@ import moment from "moment";
 import ViewProductsTable from "../Table/ViewProductsTable";
 import axios from 'axios';
 
-const Catalogo = () => {
+const Catalogo = (props) => {
   const [productos, setProductos] = useState([]);
   const [orders, setOrders] = useState([]);
   const [tableData, setTableData] = useState([]);
 
+  const {refetch, setRefetch } = props;
   const todayDate = new Date();
   todayDate.setDate(todayDate.getDate() - 5);
   const timeTemp = moment(todayDate).format();
@@ -28,12 +29,16 @@ const Catalogo = () => {
   };
 
   useEffect(() => {
-    getProducts();
-  }, []);
+    if(refetch){
+      getProducts();
+    }
+      setRefetch(false)
+    
+  }, [refetch]);
 
   return (
     <div>
-      <ViewProductsTable products={productos}/>
+      <ViewProductsTable products={productos} refetch={refetch} setRefetch={setRefetch}/>
     </div>
   );
 };

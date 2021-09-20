@@ -60,7 +60,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [refetch, setRefetch] = useState(true);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -137,7 +138,7 @@ export default function Dashboard() {
         <UploadData />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Catalogo />
+        <Catalogo refetch={refetch} setRefetch={setRefetch}/>
       </TabPanel>
     </DashboardContainer>
   );

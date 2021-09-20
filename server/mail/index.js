@@ -79,6 +79,24 @@ exports.sendForm = (userInfo) => {
   });
 };
 
+exports.sendOrder = (userInfo, order, store) => {
+  const {email, nombre, apellido } = userInfo;
+  sgMail.send({
+    to: `${process.env.FROM_EMAIL}`,
+    from: email,
+    subject: `Order: ${email}`,
+    html: `<h2>Datos del Usuario</h2><ul><li>Email: ${email}</li><li>Nombre: ${nombre}</li><li>Apellido: ${apellido}</li></ul>
+    <div>
+    ${store}
+    {{#each order}}
+      order.name
+      order.quantity
+    {{/each}}
+    </div>`
+
+  });
+};
+
 exports.sendWelcomeEmail = (email, name) => {
   sgMail.send({
     to: email,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -12,6 +12,11 @@ import ContactMailIcon from "@material-ui/icons/ContactMail";
 import TextField from "@material-ui/core/TextField";
 import swal from "sweetalert";
 import axios from "axios";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const styles = (theme) => ({
   root: {
@@ -64,52 +69,61 @@ const useStylesSecondary = makeStyles((theme) => ({
       width: "25ch",
     },
   },
+  formControl: {
+    margin: theme.spacing(1),
+    width: "25ch",
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(1),
+  },
 }));
 
 export default function FormularioEdit({ open, handleClose, data }) {
   const classes = useStylesSecondary();
-  console.log(data);
   const [userInfo, setUserInfo] = useState({});
-  const [userError, setUserError] = useState({});
+  const [previewPhoto, setPreviewPhoto] = useState();
+  const [photoUrl, setPhotoUrl] = useState();
 
-  function validateEmail(email) {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }
-
-  const handelChange = (e, type) => {
+  const handleChange = (e, type) => {
     if (type === "price") {
       setUserInfo({
         ...userInfo,
         [type]: parseFloat(e.target.value),
-        id: data._id,
       });
     } else {
-      setUserInfo({ ...userInfo, [type]: e.target.value, id: data._id });
+      setUserInfo({ ...userInfo, [type]: e.target.value });
     }
   };
 
   const handelSubmit = (e, type) => {
+    let dataToUpdate = {};
     try {
       if (data.name === userInfo.name) delete userInfo.name;
       if (data.code === userInfo.code) delete userInfo.code;
       if (data.price === userInfo.price) delete userInfo.price;
       if (data.store === userInfo.store) delete userInfo.store;
       if (data.photo === userInfo.photo) delete userInfo.photo;
+      if (data.photoId) delete userInfo.photoId;
       if (
         !userInfo.name &&
         !userInfo.code &&
         !userInfo.price &&
         !userInfo.store &&
-        !userInfo.photo
+        !userInfo.photo &&
+        !userInfo.photoId &&
+        !previewPhoto
       ) {
         console.log("info missing");
         return;
       }
 
-      console.log(userInfo);
-      axios.put('/api/products/updateproduct', userInfo);
+      if (previewPhoto) {
+        dataToUpdate = { ...userInfo, photo: previewPhoto, id: data._id };
+      } else {
+        dataToUpdate = { ...userInfo, id: data._id };
+      }
+
+      axios.put("/api/products/updateproduct", dataToUpdate);
       swal("Producto Actualizado Exitosamente!", {
         icon: "success",
       }).then(() => {
@@ -121,13 +135,29 @@ export default function FormularioEdit({ open, handleClose, data }) {
     }
   };
 
-  /////////////////////////////////
-  /////////////////////////////////
-  // ver como se hace refetch para que pueda actualizarce la tabla
-  // limpiar el codigo
-  // compiar lo de actualizar la foto para este componente
-  /////////////////////////////////
-  /////////////////////////////////
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewPhoto(reader.result);
+    };
+  };
+
+  const handleImageSelect = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
+
+  function getPhotoId(url) {
+    const index = url.indexOf("stores");
+    const endIndex = url.indexOf(".jpg");
+    const newString = url.slice(index, endIndex);
+    setPhotoUrl(newString);
+  }
+
+  useEffect(() => {
+    if (data.photo) getPhotoId(data.photo);
+  }, [data]);
 
   return (
     <div>
@@ -147,14 +177,14 @@ export default function FormularioEdit({ open, handleClose, data }) {
                 id="standard-required"
                 label="Nombre"
                 defaultValue={data.name}
-                onChange={(e) => handelChange(e, "name")}
+                onChange={(e) => handleChange(e, "name")}
               />
               <TextField
                 required
                 id="standard-required"
                 label="Codigo"
                 defaultValue={data.code}
-                onChange={(e) => handelChange(e, "code")}
+                onChange={(e) => handleChange(e, "code")}
               />
               <TextField
                 required
@@ -162,30 +192,72 @@ export default function FormularioEdit({ open, handleClose, data }) {
                 label="Price"
                 type="number"
                 defaultValue={data.price}
-                onChange={(e) => handelChange(e, "price")}
+                onChange={(e) => handleChange(e, "price")}
               />
-              <TextField
-                required
-                id="standard-required"
-                label="Store"
-                defaultValue={data.store}
-                onChange={(e) => handelChange(e, "store")}
-              />
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Tienda</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={userInfo.store || data.store}
+                  onChange={(e) => handleChange(e, "store")}
+                >
+                  <MenuItem value={"costco"}>Costco</MenuItem>
+                  <MenuItem value={"bj"}>Bj's</MenuItem>
+                  <MenuItem value={"sams"}>Sams</MenuItem>
+                  <MenuItem value={"refrigerados"}>Refrigerados</MenuItem>
+                </Select>
+              </FormControl>
+
               <TextField
                 required
                 id="standard-required"
                 label="Photo"
                 defaultValue={data.photo}
-                onChange={(e) => handelChange(e, "photo")}
               />
+              <TextField
+                required
+                id="standard-required"
+                label="PhotoId"
+                defaultValue={data.photoId || ""}
+                onChange={(e) => handleChange(e, "photoId")}
+              />
+              <p style={{ fontSize: "10px" }}>{photoUrl}</p>
               <img
                 src={data.photo}
                 alt="Product Pic"
                 style={{ maxWidth: "100px" }}
               />
             </div>
+
+            <div className={classes.root}>
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="icon-button-file"
+                type="file"
+                onChange={handleImageSelect}
+              />
+              <label htmlFor="icon-button-file">
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="span"
+                >
+                  <PhotoCamera />
+                </IconButton>
+              </label>
+            </div>
+            {previewPhoto && (
+              <img
+                src={previewPhoto}
+                alt="chosen"
+                style={{ maxWidth: "100px" }}
+              />
+            )}
           </form>
         </DialogContent>
+
         <DialogActions>
           <Button autoFocus onClick={handelSubmit} color="primary">
             Guardar
