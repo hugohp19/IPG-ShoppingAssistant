@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import styled from "styled-components";
 import ProductCard from "../components/ProductCard";
-import Banner from "../assets/images/Compracatalogo-min.png";
+import Banner from "../assets/images/Compracatalogo-Banner.png";
 import { AuthContext } from "../context/AuthContext";
 import Button from "@material-ui/core/Button";
 import swal from "sweetalert";
@@ -23,7 +23,6 @@ const Catalogo = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(!userProducts || Object.keys(userProducts).length < 1){ 
-      console.log('hello')
       swal("Debes seleccionar algun producto", {
         icon: "warning",
       });
@@ -58,25 +57,19 @@ const Catalogo = () => {
   };
 
   const handleChange = (e) => {
-    console.log('state: ', userProducts)
     e.preventDefault();
     const tempProductObject = userProducts;
-    console.log('initial: ', tempProductObject)
     if(e.target.value === 0){
       if(tempProductObject[e.target.name]){
         delete tempProductObject[e.target.name]
         setUserProducts({
           ...tempProductObject
         });
-        console.log('after deleting: ', tempProductObject)
         return;
       } else{
         return;
       }
     }
-    console.log('updated State before setting ', {...tempProductObject,
-      [e.target.name]: { product: e.target.name, quantity: e.target.value },
-    })
     setUserProducts({
       ...tempProductObject,
       [e.target.name]: { product: e.target.name, quantity: e.target.value },
@@ -147,11 +140,11 @@ const CatalogoContainer = styled.div`
 const CatalogoBanner = styled.div`
   img {
     width: 100%;
-    background-size: cover
+    background-position: center;
   }
   margin: 30px;
   max-height: 200px;
-  background-color: #512776;
+  overflow: hidden;
   width: 100%;
   display: flex;
   justify-content: center;

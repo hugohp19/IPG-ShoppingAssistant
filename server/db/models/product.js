@@ -17,6 +17,11 @@ const mongoose = require('mongoose');
         required: true,
         trim: true
       },
+      photoId:{
+        type: String,
+        // required: true,
+        trim: true
+      },
       isActive: {
         type: Boolean,
         required: true,

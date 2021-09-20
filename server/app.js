@@ -18,7 +18,6 @@ const express = require('express'),
 
 // Parse incoming JSON into objects
 app.use(express.json());
-
 //Middleware to parse through incoming cookies in the requests.
 app.use(cookieParser());
 
