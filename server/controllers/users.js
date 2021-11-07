@@ -6,6 +6,7 @@ isAdmin = require('../middleware/authorization/index'), ///try to implement isAd
   //   sendCancellationEmail,
   //   forgotPasswordEmail
   // } = require('../emails/index'),
+  {forgotPasswordEmail} = require('../mail/index'),
   jwt = require('jsonwebtoken'),
   {sendForm} = require('../mail/index')
 
@@ -72,8 +73,8 @@ exports.requestPasswordReset = async (req, res) => {
       { _id: user._id.toString(), name: user.name },
       process.env.JWT_SECRET,
       { expiresIn: '10m' }
-    );
-    forgotPasswordEmail(email, token);
+      );
+      forgotPasswordEmail(email, token, user.firstName);
     res.json({ message: 'reset password email sent!' });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -82,6 +83,7 @@ exports.requestPasswordReset = async (req, res) => {
 
 exports.passwordRedirect = async (req, res) => {
   const { token } = req.params;
+ 
   try {
     jwt.verify(token, process.env.JWT_SECRET, function (err) {
       if (err) throw new Error(err.message);
@@ -91,7 +93,7 @@ exports.passwordRedirect = async (req, res) => {
       maxAge: 600000,
       sameSite: 'Strict'
     });
-    res.redirect(process.env.URL + '/update-password');
+    res.redirect(process.env.APP_URL + '/update-password');
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

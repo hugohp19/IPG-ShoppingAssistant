@@ -115,13 +115,16 @@ exports.sendCancellationEmail = (email, name) => {
   });
 };
 
-exports.forgotPasswordEmail = (email, token) => {
-  const exampleHTMLEmail = `<a target="_blank" rel="noopener noreferrer" href="${process.env.APP_URL}/api/password/${token}">Reset Password</a>`;
-
+exports.forgotPasswordEmail = (email, token, name) => {
   sgMail.send({
     to: email,
     from: process.env.FROM_EMAIL,
     subject: 'Password Reset',
-    html: exampleHTMLEmail
+    TemplateId: 'd-bba529307b974c1c9188b8fb491c9718',
+    dynamicTemplateData: {
+      name: name,
+      // resetLink: `${process.env.APP_API_URL}/api/password/${token}`
+      resetLink: `/api/password/${token}`
+    },
   });
 };
