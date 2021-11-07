@@ -13,6 +13,8 @@ import UpdateProfile from './components/UpdateProfile';
 import UploadData from './components/secure/UploadData';
 import Dashboard from './containers/Dashboard';
 import AuthenticatedRoute from './components/AuthenticatedRoutes';
+import RequestPassword from './components/Password/RequestPassword'
+import UpdatePassword from './components/Password/UpdatePassword'
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route exact path="/catalogo" component={Catalogo} />
           <Route exact path="/formulario" component={Formulario} />
           <Route exact path="/update-profile" component={UpdateProfile} />
+          <Route exact path="/update-password" component={UpdatePassword} />
+          <Route exact path="/requestpassword" component={RequestPassword} />
           <AuthenticatedRoute exact path="/administrador" component={Dashboard} />
         </Switch>
       </BrowserRouter>

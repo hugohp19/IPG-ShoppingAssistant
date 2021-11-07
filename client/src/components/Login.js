@@ -128,7 +128,7 @@ const Login = () => {
           </Grid>
           <Grid container justify="center">
             <Grid item>
-              <Link to='/forgot-password'>
+              <Link to='/requestpassword'>
                 Forgot Password
               </Link>
             </Grid>

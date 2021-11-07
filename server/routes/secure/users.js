@@ -1,4 +1,4 @@
-const router = require('express').Router(),
+const router = require("express").Router(),
   {
     getCurrentUser,
     updateCurrentUser,
@@ -8,19 +8,18 @@ const router = require('express').Router(),
     //uploadAvatar,
     updatePassword,
     getAllUsers,
-getCurrentUserOrders
+    getCurrentUserOrders,
+  } = require("../../controllers/users");
 
-  } = require('../../controllers/users');
-
-router.get('/me', getCurrentUser);
-router.patch('/me', updateCurrentUser);
-router.post('/logout', logoutUser);
-router.post('/logoutall', logoutAllDevices);
-router.delete('/', deleteUser);
-router.get('/users', getAllUsers);
-router.get('/user/orders', getCurrentUserOrders);
+router.get("/me", getCurrentUser);
+router.patch("/me", updateCurrentUser);
+router.post("/logout", logoutUser);
+router.post("/logoutall", logoutAllDevices);
+router.delete("/", deleteUser);
+router.get("/users", getAllUsers);
+router.get("/user/orders", getCurrentUserOrders);
 
 //router.post('/avatar', uploadAvatar);
-router.put('/password', updatePassword);
+router.put("/password", updatePassword);
 
 module.exports = router;
