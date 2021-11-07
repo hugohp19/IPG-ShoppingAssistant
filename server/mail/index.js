@@ -123,8 +123,8 @@ exports.forgotPasswordEmail = (email, token, name) => {
     TemplateId: 'd-bba529307b974c1c9188b8fb491c9718',
     dynamicTemplateData: {
       name: name,
-      // resetLink: `${process.env.APP_API_URL}/api/password/${token}`
-      resetLink: `/api/password/${token}`
+      resetLink: `${process.env.APP_URL}/api/password/${token}`
+      // resetLink: `/api/password/${token}`
     },
   });
 };
