@@ -1,5 +1,5 @@
 const Order = require("../db/models/order");
-const { sendOrder } = require("../mail/index")
+const { sendOrderToUser } = require("../mail/index");
 
 exports.createOrder = async (req, res) => {
   const owner = req.user._id;
@@ -10,7 +10,7 @@ exports.createOrder = async (req, res) => {
     const newOrder = await new Order({
       owner,
       store,
-      order: orderArray
+      order: orderArray,
     });
     await newOrder.save();
     let user = req.user;
@@ -27,10 +27,10 @@ exports.createOrder = async (req, res) => {
           name: 1,
           price: 1,
           store: 1,
-        }
+        },
       },
     });
-    //sendOrder(req.user.email, req.user.firstName, recentOrder[0].order)
+    sendOrderToUser(req.user.email, req.user.firstName, recentOrder[0].order);
     res.status(200).send(newOrder);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -82,7 +82,7 @@ exports.getAllOrders = async (req, res) => {
       const orders = await Order.find({
         createdAt: { $gte: startOfWeek, $lte: endOfWeek },
         store: "costco",
-        isActive: true
+        isActive: true,
       })
         .populate({
           path: "owner",
