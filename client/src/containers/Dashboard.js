@@ -143,7 +143,7 @@ export default function Dashboard() {
         <Catalogo refetch={refetch} setRefetch={setRefetch}/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        {orders ? <ViewOrderTableByDate data={orders} /> : <Spinner />}
+        <ViewOrderTableByDate />
       </TabPanel>
     </DashboardContainer>
   );
