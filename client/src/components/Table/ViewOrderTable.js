@@ -27,7 +27,7 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-export default function ViewOrderTable( {data}) {
+export default function ViewOrderTable({data}) {
   const classes = useStyles();
   const organizeData = data.map((order)=>{
     const sortedOrders = order.order.sort((a,b)=>{

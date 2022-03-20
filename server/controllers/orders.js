@@ -71,6 +71,39 @@ exports.getOrders = async (req, res) => {
   }
 };
 
+exports.getOrdersByDates = async (req, res) => {
+  if (!req.user.admin) {
+    res.status(401).send("Authorization Required");
+  } else {
+    const {from, to } = req.body;
+    try {
+      const orders = await Order.find({
+        createdAt: { $gte: from, $lte: to },
+        store: "costco",
+      })
+        .populate({
+          path: "owner",
+          select: {
+            firstName: 1,
+            lastName: 1,
+            email: 1,
+            phoneNumber: 1,
+          },
+        })
+        .populate({
+          path: "order",
+          populate: {
+            path: "product",
+          },
+        });
+      console.log(orders)
+      res.status(200).send(orders);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
+};
+
 exports.getAllOrders = async (req, res) => {
   if (!req.user.admin) {
     res.status(401).send("Authorization Required");

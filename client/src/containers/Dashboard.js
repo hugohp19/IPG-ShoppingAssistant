@@ -17,6 +17,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 import Catalogo from "../components/secure/Catalogo";
+import ViewOrderTableByDate from "../components/Table/ViewOrderTableByDate";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -129,6 +130,7 @@ export default function Dashboard() {
           <Tab label="Ver Orden" />
           <Tab label="Agregar Producto" />
           <Tab label="Catalogo" />
+          <Tab label="Ver Ordenes por Fecha" />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -139,6 +141,9 @@ export default function Dashboard() {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Catalogo refetch={refetch} setRefetch={setRefetch}/>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        {orders ? <ViewOrderTableByDate data={orders} /> : <Spinner />}
       </TabPanel>
     </DashboardContainer>
   );
