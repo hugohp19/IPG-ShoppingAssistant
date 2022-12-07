@@ -1,7 +1,7 @@
 {
   "name": "ipg-API",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "1.0.1",
+  "main": "IPG-WebApp",
   "license": "MIT",
   "dependencies": {
     "@sendgrid/mail": "^7.4.5",
